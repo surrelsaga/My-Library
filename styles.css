@@ -1,0 +1,198 @@
+/* =====================
+   CSS VARIABLES
+   ===================== */
+:root {
+  --bg: #f5f0e8;
+  --surface: #ffffff;
+  --primary: #2c3e50;
+  --accent: #e74c3c;
+  --text: #2c3e50;
+  --text-muted: #7f8c8d;
+  --border: #ddd;
+  --radius: 8px;
+}
+
+/* =====================
+   RESET & BASE
+   ===================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Georgia, serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =====================
+   HEADER
+   ===================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--primary);
+  color: white;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+}
+
+/* =====================
+   BUTTONS
+   ===================== */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+#new-book-btn {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* =====================
+   LIBRARY GRID
+   ===================== */
+#library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* =====================
+   BOOK CARD
+   (JS will create these elements)
+   ===================== */
+.book-card {
+  background-color: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.book-card .book-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.book-card .book-author {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.book-card .book-pages {
+  font-size: 0.85rem;
+}
+
+.book-card .book-read-status {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.book-card .book-read-status.read {
+  color: green;
+}
+
+.book-card .book-read-status.not-read {
+  color: var(--accent);
+}
+
+.book-card .card-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.8rem;
+}
+
+.btn-toggle-read {
+  background-color: var(--primary);
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.btn-remove {
+  background-color: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}
+
+/* =====================
+   DIALOG / MODAL
+   ===================== */
+dialog {
+  border: none;
+  border-radius: var(--radius);
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+dialog h2 {
+  margin-bottom: 1.2rem;
+}
+
+#book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+#book-form label {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+#book-form input[type="text"],
+#book-form input[type="number"] {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+#book-form input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.form-buttons button[type="submit"] {
+  background-color: var(--primary);
+  color: white;
+  flex: 1;
+}
+
+.form-buttons #cancel-btn {
+  background-color: var(--border);
+  color: var(--text);
+  flex: 1;
+}
