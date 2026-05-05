@@ -76,4 +76,21 @@ bookForm.addEventListener("submit", (e) => {
 
   // YOUR CODE HERE
   // read form values, call your functions, re-render, close dialog
+
+  // Read form values
+  const newBookTitle = document.querySelector('#title').value;
+  let newBookAuthor = document.querySelector('#author').value;
+  let newBookPages = Number( document.querySelector('#pages').value );
+
+  let readStatus;
+  let alreadyRead = document.querySelector('#read')
+  if (alreadyRead.checked) {
+    readStatus = true;
+  } else {
+    readStatus = false;
+  }
+
+  addBookToLibrary(newBookTitle, newBookAuthor, newBookPages, readStatus);
+  dialog.close();
+  displayBooks(myLibrary);
 });
