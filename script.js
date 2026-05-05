@@ -24,12 +24,15 @@ addBookToLibrary('H', 'G', 250, true);
 addBookToLibrary('G','K', 69, false);
 console.log(myLibrary);
 
+// Bring this out so it's in global scope that any function can access
+const libraryGrid = document.querySelector('#library-grid');
+
 function displayBooks(myLibrary) {
   myLibrary.forEach( function(item) {
     // Generate book cards then put inside the display grid
     const bookCard = document.createElement('div');
     bookCard.classList.add('book-card');
-    const libraryGrid = document.querySelector('#library-grid');
+    bookCard.setAttribute('data-id', item.ID); // Add a data-id attribute to each book card so later is used to identify which book card to remove
     libraryGrid.appendChild(bookCard);
 
     // Retrieve book's data from the library and display in the book card
@@ -49,19 +52,36 @@ function displayBooks(myLibrary) {
     bookReadStatus.textContent = `Status: ${item.readStatus}`;
     bookReadStatus.classList.add('book-read-status');
 
+    let removeBookBtn = document.createElement('button');
+    removeBookBtn.classList.add('btn-remove');
+    removeBookBtn.textContent = 'Remove';
+
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(bookPages);
     bookCard.appendChild(bookReadStatus);
+    bookCard.appendChild(removeBookBtn);
   });
 }
+
+function removeBook(bookCard) {
+  const bookCardID = bookCard.dataset.id;
+  const bookCardToRemove = document.querySelector(`[data-id="${bookCardID}"]`);
+  libraryGrid.removeChild(bookCardToRemove);
+}
+
 
 // Test display
 displayBooks(myLibrary);
 
-// =====================
-// UI BOILERPLATE
-// =====================
+const removeBookBtn = [...document.querySelectorAll('.btn-remove')];
+console.log(removeBookBtn);
+removeBookBtn.forEach( function(item) {
+  item.addEventListener('click', function() {
+    removeBook( item.parentNode );
+    console.log("hi");
+  });
+});
 
 const newBookBtn = document.querySelector("#new-book-btn");
 const dialog = document.querySelector("#book-dialog");
