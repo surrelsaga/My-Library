@@ -1,7 +1,5 @@
 const myLibrary = [];
 
-// YOUR CODE HERE
-// Book constructor, addBookToLibrary, removeBookFromLibrary, displayBooks...
 function Book(title, author, pages, readStatus, ID) {
   this.title = title;
   this.author = author;
@@ -24,8 +22,15 @@ addBookToLibrary('H', 'G', 250, true);
 addBookToLibrary('G','K', 69, false);
 console.log(myLibrary);
 
-// Bring this out so it's in global scope that any function can access
+// Bring this out so it's in global scope that any functions can access
 const libraryGrid = document.querySelector('#library-grid');
+
+function removeBook(bookCard) {
+  // Read id to identify which book card to remove
+  const bookCardID = bookCard.dataset.id;
+  const bookCardToRemove = document.querySelector(`[data-id="${bookCardID}"]`);
+  libraryGrid.removeChild(bookCardToRemove);
+}
 
 function displayBooks(myLibrary) {
   myLibrary.forEach( function(item) {
@@ -61,27 +66,16 @@ function displayBooks(myLibrary) {
     bookCard.appendChild(bookPages);
     bookCard.appendChild(bookReadStatus);
     bookCard.appendChild(removeBookBtn);
+
+    // Add click event to each new remove buttons of a book card
+    removeBookBtn.addEventListener('click', function() {
+      removeBook(bookCard);
+    });
   });
 }
-
-function removeBook(bookCard) {
-  const bookCardID = bookCard.dataset.id;
-  const bookCardToRemove = document.querySelector(`[data-id="${bookCardID}"]`);
-  libraryGrid.removeChild(bookCardToRemove);
-}
-
 
 // Test display
 displayBooks(myLibrary);
-
-const removeBookBtn = [...document.querySelectorAll('.btn-remove')];
-console.log(removeBookBtn);
-removeBookBtn.forEach( function(item) {
-  item.addEventListener('click', function() {
-    removeBook( item.parentNode );
-    console.log("hi");
-  });
-});
 
 const newBookBtn = document.querySelector("#new-book-btn");
 const dialog = document.querySelector("#book-dialog");
@@ -93,9 +87,6 @@ cancelBtn.addEventListener("click", () => dialog.close());
 
 bookForm.addEventListener("submit", (e) => {
   e.preventDefault(); // prevents page reload on form submit
-
-  // YOUR CODE HERE
-  // read form values, call your functions, re-render, close dialog
 
   // Read form values
   const newBookTitle = document.querySelector('#title').value;
