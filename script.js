@@ -92,5 +92,8 @@ bookForm.addEventListener("submit", (e) => {
 
   addBookToLibrary(newBookTitle, newBookAuthor, newBookPages, readStatus);
   dialog.close();
-  displayBooks(myLibrary);
+  // Because displayBooks will iterate through myLibrary and display all the books
+  // If use that function for myLibrary, it will end up displaying duplicates
+  // Fix: put the new book inside an array and pass to displayBooks()
+  displayBooks( [ myLibrary[myLibrary.length - 1] ] );
 });
