@@ -19,25 +19,61 @@ function addBookToLibrary(title, author, pages, readStatus) {
   myLibrary.push(oneBook);
 }
 
+// Hardcoded books (temporary)
 addBookToLibrary('H', 'G', 250, true);
 addBookToLibrary('G','K', 69, false);
 console.log(myLibrary);
+
+function displayBooks(myLibrary) {
+  myLibrary.forEach( function(item) {
+    // Generate book cards then put inside the display grid
+    const bookCard = document.createElement('div');
+    bookCard.classList.add('book-card');
+    const libraryGrid = document.querySelector('#library-grid');
+    libraryGrid.appendChild(bookCard);
+
+    // Retrieve book's data from the library and display in the book card
+    let bookTitle = document.createElement('p');
+    bookTitle.textContent = item.title;
+    bookTitle.classList.add('book-title');
+
+    let bookAuthor = document.createElement('p');
+    bookAuthor.textContent = `Author: ${item.author}`;
+    bookAuthor.classList.add('book-author');
+
+    let bookPages = document.createElement('p');
+    bookPages.textContent = `Number of pages: ${item.pages}`;
+    bookPages.classList.add('book-pages');
+
+    let bookReadStatus = document.createElement('button');
+    bookReadStatus.textContent = `Status: ${item.readStatus}`;
+    bookReadStatus.classList.add('book-read-status');
+
+    bookCard.appendChild(bookTitle);
+    bookCard.appendChild(bookAuthor);
+    bookCard.appendChild(bookPages);
+    bookCard.appendChild(bookReadStatus);
+  });
+}
+
+// Test display
+displayBooks(myLibrary);
 
 // =====================
 // UI BOILERPLATE
 // =====================
 
-// const newBookBtn = document.querySelector("new-book-btn");
-// const dialog = document.querySelector("book-dialog");
-// const cancelBtn = document.querySelector("cancel-btn");
-// const bookForm = document.querySelector("book-form");
+const newBookBtn = document.querySelector("#new-book-btn");
+const dialog = document.querySelector("#book-dialog");
+const cancelBtn = document.querySelector("#cancel-btn");
+const bookForm = document.querySelector("#book-form");
 
-// newBookBtn.addEventListener("click", () => dialog.showModal());
-// cancelBtn.addEventListener("click", () => dialog.close());
+newBookBtn.addEventListener("click", () => dialog.showModal());
+cancelBtn.addEventListener("click", () => dialog.close());
 
-// bookForm.addEventListener("submit", (e) => {
-//   e.preventDefault(); // prevents page reload on form submit
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault(); // prevents page reload on form submit
 
-//   // YOUR CODE HERE
-//   // read form values, call your functions, re-render, close dialog
-// });
+  // YOUR CODE HERE
+  // read form values, call your functions, re-render, close dialog
+});
