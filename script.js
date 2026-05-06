@@ -8,6 +8,11 @@ function Book(title, author, pages, readStatus, ID) {
   this.ID = ID
 }
 
+// A helper prototype function to for book objects to toggle its own read status
+Book.prototype.toggleReadStatus = function() {
+  this.readStatus = !this.readStatus;
+}
+
 function addBookToLibrary(title, author, pages, readStatus) {
   // Assign an unique ID for each book to prevent issues when books are removed or rearranged
   const uuid = crypto.randomUUID();
@@ -55,19 +60,19 @@ function displayBook(oneBook) {
   libraryGrid.appendChild(bookCard);
 
   // Retrieve book's data from the library and display in the book card
-  let bookTitle = document.createElement('p');
+  const bookTitle = document.createElement('p');
   bookTitle.textContent = oneBook.title;
   bookTitle.classList.add('book-title');
 
-  let bookAuthor = document.createElement('p');
+  const bookAuthor = document.createElement('p');
   bookAuthor.textContent = `Author: ${oneBook.author}`;
   bookAuthor.classList.add('book-author');
 
-  let bookPages = document.createElement('p');
+  const bookPages = document.createElement('p');
   bookPages.textContent = `Number of pages: ${oneBook.pages}`;
   bookPages.classList.add('book-pages');
   
-  let readStatus = document.createElement('p');
+  const readStatus = document.createElement('p');
   readStatus.classList.add('book-read-status');
   if (oneBook.readStatus) {
     readStatus.textContent = 'Already read';
@@ -78,14 +83,14 @@ function displayBook(oneBook) {
   }
 
   //BUTTONS 
-  let cardButtons = document.createElement('div');
+  const cardButtons = document.createElement('div');
   cardButtons.classList.add('card-buttons');
 
-  let toggleStatusBtn = document.createElement('button');
+  const toggleStatusBtn = document.createElement('button');
   toggleStatusBtn.textContent = 'Toggle read';
   toggleStatusBtn.classList.add('btn-toggle-read');
 
-  let removeBookBtn = document.createElement('button');
+  const removeBookBtn = document.createElement('button');
   removeBookBtn.classList.add('btn-remove');
   removeBookBtn.textContent = 'Remove';
 
@@ -105,9 +110,6 @@ function displayBook(oneBook) {
 
   toggleStatusBtn.addEventListener('click', function() {
     if(oneBook.readStatus) {
-      // Change status
-      oneBook.readStatus = false;
-
       // Clear styling of the status text
       readStatus.classList.remove('read');
 
@@ -116,9 +118,6 @@ function displayBook(oneBook) {
       readStatus.classList.add('not-read');
 
     } else {
-      // Change status
-      oneBook.readStatus = true;
-
       // Clear styling of the status text
       readStatus.classList.remove('not-read');
 
@@ -126,6 +125,10 @@ function displayBook(oneBook) {
       readStatus.textContent = "Already read";
       readStatus.classList.add('read');
     }
+
+    // Change status
+    oneBook.toggleReadStatus();
+    console.log(myLibrary);
   });
 }
 
@@ -147,11 +150,11 @@ bookForm.addEventListener("submit", (event) => {
 
   // Read form values
   const newBookTitle = document.querySelector('#title').value;
-  let newBookAuthor = document.querySelector('#author').value;
-  let newBookPages = Number( document.querySelector('#pages').value );
+  const newBookAuthor = document.querySelector('#author').value;
+  const newBookPages = Number( document.querySelector('#pages').value );
 
   let readStatus;
-  let alreadyRead = document.querySelector('#read')
+  const alreadyRead = document.querySelector('#read')
   if (alreadyRead.checked) {
     readStatus = true;
   } else {
