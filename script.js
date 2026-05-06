@@ -17,11 +17,10 @@ function addBookToLibrary(title, author, pages, readStatus) {
   myLibrary.push(oneBook);
 }
 
-// Hardcoded books
+// Hardcoded books (examples)
 addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
 addBookToLibrary('Dune','Frank Herbert', 412, false);
 addBookToLibrary('Atomic Habits', 'James Clear', 256, true);
-console.log(myLibrary);
 
 // Bring this out so it's in global scope where any functions can access
 const libraryGrid = document.querySelector('#library-grid');
@@ -29,8 +28,23 @@ const libraryGrid = document.querySelector('#library-grid');
 function removeBook(bookCard) {
   // Read id to identify which book card to remove
   const bookCardID = bookCard.dataset.id;
+
+  // #1: Remove from DOM
   const bookCardToRemove = document.querySelector(`[data-id="${bookCardID}"]`);
   libraryGrid.removeChild(bookCardToRemove);
+
+  // #2: Remove from the library (it's an array)
+  myLibrary.forEach( function(item) {
+    if (item.ID === bookCardID) {
+      // Find index of item with the id
+      const bookIndex = myLibrary.indexOf(item);
+
+      // Remove the book
+      myLibrary.splice(bookIndex, 1);
+    }
+  });
+
+  console.log(myLibrary);
 }
 
 function displayBooks(myLibrary) {
@@ -128,8 +142,8 @@ const bookForm = document.querySelector("#book-form");
 newBookBtn.addEventListener("click", () => dialog.showModal());
 cancelBtn.addEventListener("click", () => dialog.close());
 
-bookForm.addEventListener("submit", (e) => {
-  e.preventDefault(); // prevents page reload on form submit
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault(); // prevents page reload on form submit
 
   // Read form values
   const newBookTitle = document.querySelector('#title').value;
@@ -150,4 +164,5 @@ bookForm.addEventListener("submit", (e) => {
   // If use that function for myLibrary, it will end up displaying duplicates
   // Fix: put the new book inside an array and pass to displayBooks()
   displayBooks( [ myLibrary[myLibrary.length - 1] ] );
+  console.log(myLibrary);
 });
