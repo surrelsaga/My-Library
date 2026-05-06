@@ -17,9 +17,10 @@ function addBookToLibrary(title, author, pages, readStatus) {
   myLibrary.push(oneBook);
 }
 
-// Hardcoded books (temporary)
-addBookToLibrary('H', 'G', 250, true);
-addBookToLibrary('G','K', 69, false);
+// Hardcoded books
+addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
+addBookToLibrary('Dune','Frank Herbert', 412, false);
+addBookToLibrary('Atomic Habits', 'James Clear', 256, true);
 console.log(myLibrary);
 
 // Bring this out so it's in global scope where any functions can access
