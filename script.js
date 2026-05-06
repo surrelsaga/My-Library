@@ -63,20 +63,26 @@ function displayBooks(myLibrary) {
       readStatus.classList.add('not-read');
     }
 
+    //BUTTONS 
+    let cardButtons = document.createElement('div');
+    cardButtons.classList.add('card-buttons');
+
     let toggleStatusBtn = document.createElement('button');
     toggleStatusBtn.textContent = 'Toggle read';
-    toggleStatusBtn.classList.add('book-read-status');
+    toggleStatusBtn.classList.add('btn-toggle-read');
 
     let removeBookBtn = document.createElement('button');
     removeBookBtn.classList.add('btn-remove');
     removeBookBtn.textContent = 'Remove';
 
+    cardButtons.appendChild(toggleStatusBtn);
+    cardButtons.appendChild(removeBookBtn);
+
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(bookPages);
     bookCard.appendChild(readStatus);
-    bookCard.appendChild(toggleStatusBtn);
-    bookCard.appendChild(removeBookBtn);
+    bookCard.appendChild(cardButtons);
 
     // Add click event to each new remove buttons of a book card
     removeBookBtn.addEventListener('click', function() {
@@ -98,7 +104,7 @@ function displayBooks(myLibrary) {
       } else {
         // Change status
         item.readStatus = true;
-        
+
         // Clear styling of the status text
         readStatus.classList.remove('not-read');
 
