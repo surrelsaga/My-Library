@@ -22,7 +22,7 @@ addBookToLibrary('H', 'G', 250, true);
 addBookToLibrary('G','K', 69, false);
 console.log(myLibrary);
 
-// Bring this out so it's in global scope that any functions can access
+// Bring this out so it's in global scope where any functions can access
 const libraryGrid = document.querySelector('#library-grid');
 
 function removeBook(bookCard) {
@@ -64,7 +64,7 @@ function displayBooks(myLibrary) {
     }
 
     let toggleStatusBtn = document.createElement('button');
-    toggleStatusBtn.textContent = `Status: ${item.readStatus}`;
+    toggleStatusBtn.textContent = 'Toggle read';
     toggleStatusBtn.classList.add('book-read-status');
 
     let removeBookBtn = document.createElement('button');
@@ -83,7 +83,30 @@ function displayBooks(myLibrary) {
       removeBook(bookCard);
     });
 
+    toggleStatusBtn.addEventListener('click', function() {
+      if(item.readStatus) {
+        // Change status
+        item.readStatus = false;
 
+        // Clear styling of the status text
+        readStatus.classList.remove('read');
+
+        // Rerender the status text
+        readStatus.textContent = "Haven't read";
+        readStatus.classList.add('not-read');
+
+      } else {
+        // Change status
+        item.readStatus = true;
+        
+        // Clear styling of the status text
+        readStatus.classList.remove('not-read');
+
+        // Rerender the status text
+        readStatus.textContent = "Already read";
+        readStatus.classList.add('read');
+      }
+    });
   });
 }
 
