@@ -52,10 +52,20 @@ function displayBooks(myLibrary) {
     let bookPages = document.createElement('p');
     bookPages.textContent = `Number of pages: ${item.pages}`;
     bookPages.classList.add('book-pages');
+    
+    let readStatus = document.createElement('p');
+    readStatus.classList.add('book-read-status');
+    if (item.readStatus) {
+      readStatus.textContent = 'Already read';
+      readStatus.classList.add('read');
+    } else {
+      readStatus.textContent = "Haven't read";
+      readStatus.classList.add('not-read');
+    }
 
-    let bookReadStatus = document.createElement('button');
-    bookReadStatus.textContent = `Status: ${item.readStatus}`;
-    bookReadStatus.classList.add('book-read-status');
+    let toggleStatusBtn = document.createElement('button');
+    toggleStatusBtn.textContent = `Status: ${item.readStatus}`;
+    toggleStatusBtn.classList.add('book-read-status');
 
     let removeBookBtn = document.createElement('button');
     removeBookBtn.classList.add('btn-remove');
@@ -64,13 +74,16 @@ function displayBooks(myLibrary) {
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(bookPages);
-    bookCard.appendChild(bookReadStatus);
+    bookCard.appendChild(readStatus);
+    bookCard.appendChild(toggleStatusBtn);
     bookCard.appendChild(removeBookBtn);
 
     // Add click event to each new remove buttons of a book card
     removeBookBtn.addEventListener('click', function() {
       removeBook(bookCard);
     });
+
+
   });
 }
 
