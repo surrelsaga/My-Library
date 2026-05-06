@@ -50,6 +50,10 @@ function removeBook(bookCard) {
       myLibrary.splice(bookIndex, 1);
     }
   });
+
+  // Alternative for #2 (cleaner): findIndex()
+  // let bookToRemoveIndex = myLibrary.findIndex(book => book.ID === bookCardID);
+  // myLibrary.splice(bookToRemoveIndex, 1);
 }
 
 function displayBook(oneBook) {
