@@ -63,7 +63,7 @@ function displayBook(oneBook) {
   bookCard.setAttribute('data-id', oneBook.ID); // Add a data-id attribute to each book card so later is used to identify which book card to remove
   libraryGrid.appendChild(bookCard);
 
-  // Retrieve book's data from the library and display in the book card
+  // Retrieve book's data and display in the book card
   const bookTitle = document.createElement('p');
   bookTitle.textContent = oneBook.title;
   bookTitle.classList.add('book-title');
@@ -136,7 +136,7 @@ function displayBook(oneBook) {
   });
 }
 
-// Test display
+// Display book card example
 myLibrary.forEach( function(item) {
   displayBook(item);
 });
@@ -167,9 +167,5 @@ bookForm.addEventListener("submit", (event) => {
 
   const newBook = addBookToLibrary(newBookTitle, newBookAuthor, newBookPages, readStatus);
   dialog.close();
-  // Because displayBooks will iterate through myLibrary and display all the books
-  // If use that function for myLibrary, it will end up displaying duplicates
-  // Fix: put the new book inside an array and pass to displayBooks()
   displayBook(newBook);
-  console.log(myLibrary);
 });
