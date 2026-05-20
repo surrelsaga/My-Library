@@ -1,16 +1,32 @@
 const myLibrary = [];
 
-function Book(title, author, pages, readStatus, ID) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
-  this.ID = ID
-}
+// function Book(title, author, pages, readStatus, ID) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.readStatus = readStatus;
+//   this.ID = ID
+// }
 
-// A helper prototype function to for book objects to toggle its own read status
-Book.prototype.toggleReadStatus = function() {
-  this.readStatus = !this.readStatus;
+// // A helper prototype function to for book objects to toggle its own read status
+// Book.prototype.toggleReadStatus = function() {
+//   this.readStatus = !this.readStatus;
+// }
+
+// REFACTOR
+class Book {
+  constructor(title, author, pages, readStatus, ID) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+    this.ID = ID;
+  }
+
+  // Class methods will always be added to the class constructor prototype property
+  toggleReadStatus() {
+    this.readStatus = !this.readStatus;
+  }
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
